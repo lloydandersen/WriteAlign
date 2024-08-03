@@ -1,63 +1,23 @@
-from docx import Document
-import random
-from templates import standard_outline
+import tkinter as tk
+from tkinter import ttk
 
-standard_outline.elm()
+root = tk.Tk()
+root.title("WriteAlign")
+root.configure(background="white")
+root.minsize(700, 500)
 
+main_page = tk.Frame(root, background="white")
+main_page.pack(side="top", fill='both', padx=150, pady=150)
+main_page.columnconfigure(0, weight=1)
+write_align_title = tk.Label(main_page, text="WriteAlign", font=("Times New Roman", 50, "bold"), background="white")
+write_align_title.grid(row=0, column=0, pady=(0, 30))
+template_var = tk.StringVar()
+template_list = ["Simple Essay"]
+select_template = ttk.Combobox(main_page, textvariable=template_var, values=template_list, state="readonly", font=("Times New Roman", 16), justify="center")
+select_template.grid(row=1, column=0)
 
+select_button = tk.Button(main_page, text="Write", background="white", foreground="black", font=("Times New Roman", 16), borderwidth=2)
+select_button.grid(row=2, column=0, pady=(10, 0), ipadx=50)
 
-
-
-
-
-
-# def sample_document():
-    
-
-
-#     # Fill Document In.
-
-
-
-#     # Document Creation
-#     document = Document()
-
-
-
-
-
-
-
-
-
-
-
-#     doc_name = input("What is your documents name? ")
-#     doc_randomizer = input("Do you want a Random Document number? ")
-#     if doc_randomizer == "true":
-#         random_num = random.randint(0,20)
-#         doc_name = f"{doc_name}{random_num}"
-#     else:
-#         pass
-
-    
-#     document.save(f"{doc_name}.docx")
-
-
-# sample_document()
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
+root.mainloop()
     
