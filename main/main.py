@@ -28,11 +28,12 @@ main_page.columnconfigure(0, weight=1)
 write_align_title = tk.Label(main_page, text="WriteAlign", font=("Times New Roman", 50, "bold"), background="white")
 write_align_title.grid(row=0, column=0, pady=(0, 30))
 template_var = tk.StringVar()
-template_list = ["Simple Essay"]
+template_list = ["Simple Essay", "Simple Biography", "Simple Resume", "Simple Cover Letter"]
 select_template = ttk.Combobox(main_page, textvariable=template_var, values=template_list, state="readonly", font=("Times New Roman", 16), justify="center")
 select_template.grid(row=1, column=0)
 template_var.set(template_list[0])
 finish_frame = tk.Frame()
+general_frame = tk.Frame()
 
 
 # Template Frames
@@ -56,19 +57,40 @@ def reset_variables(*args):
     var_6.set("")
     summary_var.set("")
 
-def test_variables(*args):
-    essay_name_var.set("The Amazon Rainforest")
-    thesis_var.set("The Amazon Rainforest is important to humankind.")
-    topic_sentence_1_var.set("The Amazon Rainforest is important for climate stability.")
-    topic_sentence_2_var.set("The Amazon Rainforest provides a home for a diverse species.")
-    topic_sentence_3_var.set("The Amazon Rainforest is beautiful and important for human wellbeing.")
-    var_1.set("The Amazon Rainforest stores 2 billion metric tons of carbon annually.")
-    var_2.set("The Amazon stores 200 billion metric tons of carbon in total.")
-    var_3.set("The Amazon Rainforest has over ten of thousands of plant, animal and fungi species.")
-    var_4.set("The Amazon has many unknown species and potential for new foods, medicines and products.")
-    var_5.set("The Amazon Rainforest is home to over 30 million people.")
-    var_6.set("The Amazon Rainforest is visited by one million people each year due to its beauty.")
-    summary_var.set("The Amazon Rainforest is important for humankind and the entire planet.")
+
+def test_variables(set, *args):
+    if set == "simple essay":
+        essay_name_var.set("The Amazon Rainforest")
+        thesis_var.set("The Amazon Rainforest is important to humankind.")
+        topic_sentence_1_var.set("The Amazon Rainforest is important for climate stability.")
+        topic_sentence_2_var.set("The Amazon Rainforest provides a home for a diverse species.")
+        topic_sentence_3_var.set("The Amazon Rainforest is beautiful and important for human wellbeing.")
+        var_1.set("The Amazon Rainforest stores 2 billion metric tons of carbon annually.")
+        var_2.set("The Amazon stores 200 billion metric tons of carbon in total.")
+        var_3.set("The Amazon Rainforest has over ten of thousands of plant, animal and fungi species.")
+        var_4.set("The Amazon has many unknown species and potential for new foods, medicines and products.")
+        var_5.set("The Amazon Rainforest is home to over 30 million people.")
+        var_6.set("The Amazon Rainforest is visited by one million people each year due to its beauty.")
+        summary_var.set("The Amazon Rainforest is important for humankind and the entire planet.")
+
+    elif set == "simple biography":
+        essay_name_var.set("Ben Franklin")
+        thesis_var.set("Ben Franklin was a American hero.")
+        topic_sentence_1_var.set("He was a Founding Father of the United States.")
+        topic_sentence_2_var.set("He was the first postmaster general of the United States.")
+        topic_sentence_3_var.set("He secured strong support for the US Revolution from France as an important diplomat.")
+        var_1.set("Boston, Massachusetts Bay, British America")
+        var_2.set("January 6, 1705")
+        var_3.set("Philadelphia, Pennsylvania, U.S.")
+        var_4.set("April 17, 1790 (84)")
+        var_5.set("Politician, Diplomat, Inventor, Scientist, Writer, Printer")
+        var_6.set("6th President of Pennsylvania. Founding Father. First Postmaster General.")
+
+    elif set == "simple resume":
+        pass
+
+    elif set == "simple cover letter":
+        pass
 
 
 def generate_simple_essay_prompt():
@@ -104,6 +126,40 @@ The concluding paragraph shall emphasize the following statement: {summary_var.g
     """)
     file.close()
 
+def generate_simple_resume_prompt():
+    file = open(f"{file_name_var.get()}.txt", "w")
+    file.write(f"""
+    
+    """)
+    file.close()
+
+
+def generate_simple_cover_letter_prompt():
+    file = open(f"{file_name_var.get()}.txt", "w")
+    file.write(f"""
+
+    """)
+    file.close()
+
+
+def generate_simple_biography_prompt():
+    file = open(f"{file_name_var.get()}.txt", "w")
+    file.write(f"""Write be a biography about {essay_name_var.get()}
+It should be a three paragraph narrative about their life.
+It should begin with their birth and end with their death.
+The thesis of the paper should be: {thesis_var.get()}
+The three main points should be as follows:
+1. {topic_sentence_1_var.get()}
+2. {topic_sentence_2_var.get()}
+3. {topic_sentence_3_var.get()}
+The essay shall also include the following facts:
+{essay_name_var.get()} were born in {var_1.get()} on {var_2.get()}.
+{essay_name_var.get()} died in {var_3.get()} on {var_4.get()}.
+{essay_name_var.get()} worked as {var_5.get()}.
+Some major achievements of {essay_name_var.get()} include {var_6.get()}.
+    """)
+    file.close()
+
 
 def generate_simple_essay_outline():
     document = Document()
@@ -130,9 +186,35 @@ def generate_simple_essay_outline():
     document.add_heading("Conclusion", level=1)
     document.add_heading(f"-{summary_var.get()}", level=2)
 
+    document.save(f"{file_name_var.get()}.docx")
+
+
+def generate_simple_resume_outline():
+    document = Document()
 
     document.save(f"{file_name_var.get()}.docx")
 
+
+def generate_simple_cover_letter_outline():
+    document = Document()
+
+    document.save(f"{file_name_var.get()}.docx")
+
+
+def generate_simple_biography_outline():
+    document = Document()
+    document.add_heading(f"{essay_name_var.get()}", 0)
+    document.add_heading("Life Details", level=1)
+    document.add_heading(f"Born in {var_1.get()} on {var_2.get()}", level=2)
+    document.add_heading(f"Died in {var_3.get()} on {var_4.get()}", level=2)
+    document.add_heading(f"Work: {var_5.get()}", level=2)
+    document.add_heading(f"Achievements: {var_6.get()}", level=2)
+    document.add_heading(f"{thesis_var.get()}", level=1)
+    document.add_heading(f"{topic_sentence_1_var.get()}", level=2)
+    document.add_heading(f"{topic_sentence_2_var.get()}", level=2)
+    document.add_heading(f"{topic_sentence_3_var.get()}", level=2)
+
+    document.save(f"{file_name_var.get()}.docx")
 
 
 def simple_essay_prompt():
@@ -167,11 +249,112 @@ def simple_essay_outline():
     create_button.grid(row=1, column=0, columnspan=3, sticky="swen")
 
 
+def simple_resume_outline():
+    top = tk.Toplevel(background="white")
+
+    file_name_label = tk.Label(top, text="File Name", background="white")
+    file_name_label.grid(row=0, column=0)
+
+    file_name_entry = tk.Entry(top, textvariable=file_name_var)
+    file_name_entry.grid(row=0, column=1)
+
+    file_type_label = tk.Label(top, text=".docx", background="white")
+    file_type_label.grid(row=0, column=2)
+
+    create_button = tk.Button(top, text="Create", background="white", command=generate_simple_resume_outline)
+    create_button.grid(row=1, column=0, columnspan=3, sticky="swen")
+
+
+def simple_resume_prompt():
+    top = tk.Toplevel(background="white")
+
+    file_name_label = tk.Label(top, text="File Name", background="white")
+    file_name_label.grid(row=0, column=0)
+
+    file_name_entry = tk.Entry(top, textvariable=file_name_var)
+    file_name_entry.grid(row=0, column=1)
+
+    file_type_label = tk.Label(top, text=".txt", background="white")
+    file_type_label.grid(row=0, column=2)
+
+    create_button = tk.Button(top, text="Create", background="white", command=generate_simple_resume_prompt)
+    create_button.grid(row=1, column=0, columnspan=3, sticky="swen")
+
+
+def simple_biography_outline():
+    top = tk.Toplevel(background="white")
+
+    file_name_label = tk.Label(top, text="File Name", background="white")
+    file_name_label.grid(row=0, column=0)
+
+    file_name_entry = tk.Entry(top, textvariable=file_name_var)
+    file_name_entry.grid(row=0, column=1)
+
+    file_type_label = tk.Label(top, text=".docx", background="white")
+    file_type_label.grid(row=0, column=2)
+
+    create_button = tk.Button(top, text="Create", background="white", command=generate_simple_biography_outline)
+    create_button.grid(row=1, column=0, columnspan=3, sticky="swen")
+
+
+
+def simple_biography_prompt():
+    top = tk.Toplevel(background="white")
+
+    file_name_label = tk.Label(top, text="File Name", background="white")
+    file_name_label.grid(row=0, column=0)
+
+    file_name_entry = tk.Entry(top, textvariable=file_name_var)
+    file_name_entry.grid(row=0, column=1)
+
+    file_type_label = tk.Label(top, text=".txt", background="white")
+    file_type_label.grid(row=0, column=2)
+
+    create_button = tk.Button(top, text="Create", background="white", command=generate_simple_biography_prompt)
+    create_button.grid(row=1, column=0, columnspan=3, sticky="swen")
+
+
+def simple_cover_letter_outline():
+    top = tk.Toplevel(background="white")
+
+    file_name_label = tk.Label(top, text="File Name", background="white")
+    file_name_label.grid(row=0, column=0)
+
+    file_name_entry = tk.Entry(top, textvariable=file_name_var)
+    file_name_entry.grid(row=0, column=1)
+
+    file_type_label = tk.Label(top, text=".docx", background="white")
+    file_type_label.grid(row=0, column=2)
+
+    create_button = tk.Button(top, text="Create", background="white", command=generate_simple_cover_letter_outline)
+    create_button.grid(row=1, column=0, columnspan=3, sticky="swen")
+
+
+def simple_cover_letter_prompt():
+    top = tk.Toplevel(background="white")
+
+    file_name_label = tk.Label(top, text="File Name", background="white")
+    file_name_label.grid(row=0, column=0)
+
+    file_name_entry = tk.Entry(top, textvariable=file_name_var)
+    file_name_entry.grid(row=0, column=1)
+
+    file_type_label = tk.Label(top, text=".txt", background="white")
+    file_type_label.grid(row=0, column=2)
+
+    create_button = tk.Button(top, text="Create", background="white", command=generate_simple_cover_letter_prompt)
+    create_button.grid(row=1, column=0, columnspan=3, sticky="swen")
+
 
 def back_to_home():
     for child in root.winfo_children():
         child.pack_forget()
     main_page.pack(fill="both", side="top", padx=150, pady=150)
+
+
+def clear_general_frame():
+    for child in general_frame.winfo_children():
+        child.destroy()
 
 
 def simple_essay():
@@ -265,8 +448,185 @@ def simple_essay():
     clear_button = tk.Button(finish_frame, text="Clear", background="black", foreground="white")
     clear_button.grid(row=1, column=0, columnspan=2, sticky="swen")
     clear_button.bind("<Double-Button-1>", reset_variables)
-    clear_button.bind("<Button-3>", test_variables)
+    clear_button.bind("<Button-3>", lambda e: test_variables('simple essay'))
 
+def simple_resume():
+    clear_general_frame()
+    general_frame = tk.Frame(root, background="white")
+    general_frame.pack(side="top", pady=(10, 10), padx=10)
+    general_frame.columnconfigure((0, 1), weight=1)
+
+    back_button = tk.Button(general_frame, text="back", background="black", foreground="white",
+                            command=back_to_home)
+    back_button.grid(row=0, column=0)
+
+    simple_essay_title = tk.Label(general_frame, text="Simple Resume", background="white", foreground="black",
+                                  font=("Times New Roman", 30, "bold"))
+    simple_essay_title.grid(row=1, column=1, columnspan=2, pady=(0, 30))
+
+
+    finish_frame = tk.Frame(general_frame, background="white")
+    finish_frame.grid(row=13, column=1, columnspan=2)
+
+    prompt_generation_button = tk.Button(finish_frame, text="Prompt", background="white", foreground="black",
+                                         command=simple_resume_prompt)
+    prompt_generation_button.grid(row=0, column=0, ipadx=20, ipady=10)
+
+    outline_generation_button = tk.Button(finish_frame, text="Outline", background="white", foreground="black",
+                                          command=simple_resume_outline)
+    outline_generation_button.grid(row=0, column=1, ipadx=20, ipady=10)
+
+    clear_button = tk.Button(finish_frame, text="Clear", background="black", foreground="white")
+    clear_button.grid(row=1, column=0, columnspan=2, sticky="swen")
+    clear_button.bind("<Double-Button-1>", reset_variables)
+    clear_button.bind("<Button-3>", lambda e: test_variables('simple resume'))
+
+
+
+def simple_cover_letter():
+    clear_general_frame()
+    general_frame = tk.Frame(root, background="white")
+    general_frame.pack(side="top", pady=(10, 10), padx=10)
+    general_frame.columnconfigure((0, 1), weight=1)
+
+    back_button = tk.Button(general_frame, text="back", background="black", foreground="white",
+                            command=back_to_home)
+    back_button.grid(row=0, column=0)
+
+    simple_essay_title = tk.Label(general_frame, text="Simple Cover Letter", background="white", foreground="black",
+                                  font=("Times New Roman", 30, "bold"))
+    simple_essay_title.grid(row=1, column=1, columnspan=2, pady=(0, 30))
+
+    finish_frame = tk.Frame(general_frame, background="white")
+    finish_frame.grid(row=13, column=1, columnspan=2)
+
+    prompt_generation_button = tk.Button(finish_frame, text="Prompt", background="white", foreground="black",
+                                         command=simple_cover_letter_prompt)
+    prompt_generation_button.grid(row=0, column=0, ipadx=20, ipady=10)
+
+    outline_generation_button = tk.Button(finish_frame, text="Outline", background="white", foreground="black",
+                                          command=simple_cover_letter_outline)
+    outline_generation_button.grid(row=0, column=1, ipadx=20, ipady=10)
+
+    clear_button = tk.Button(finish_frame, text="Clear", background="black", foreground="white")
+    clear_button.grid(row=1, column=0, columnspan=2, sticky="swen")
+    clear_button.bind("<Double-Button-1>", reset_variables)
+    clear_button.bind("<Button-3>", lambda e: test_variables('simple cover letter'))
+
+
+
+def simple_biography():
+    clear_general_frame()
+    general_frame = tk.Frame(root, background="white")
+    general_frame.pack(side="top", pady=(10, 10), padx=10)
+    general_frame.columnconfigure((0, 1), weight=1)
+
+    back_button = tk.Button(general_frame, text="back", background="black", foreground="white",
+                            command=back_to_home)
+    back_button.grid(row=0, column=0)
+
+    simple_essay_title = tk.Label(general_frame, text="Simple Biography", background="white", foreground="black",
+                                  font=("Times New Roman", 30, "bold"))
+    simple_essay_title.grid(row=1, column=1, columnspan=2, pady=(0, 30))
+
+    simple_essay_name_label = tk.Label(general_frame, text="Name", background="white", foreground="black",
+                                       font=label_font)
+    simple_essay_name_label.grid(row=2, column=1, pady=(0, 5), padx=(0, 5))
+
+    simple_essay_name_entry = tk.Entry(general_frame, textvariable=essay_name_var, relief="solid", font=entry_font)
+    simple_essay_name_entry.grid(row=2, column=2, ipadx=80)
+
+    birth_location_label = tk.Label(general_frame, text="Birth Place", background="white", foreground="black",
+                                       font=label_font)
+    birth_location_label.grid(row=3, column=1, pady=(0, 5), padx=(0, 5))
+
+    birth_location_entry = tk.Entry(general_frame, textvariable=var_1, relief="solid", font=entry_font)
+    birth_location_entry.grid(row=3, column=2, ipadx=80)
+
+    birth_date_label = tk.Label(general_frame, text="Birth Date", background="white", foreground="black",
+                                       font=label_font)
+    birth_date_label.grid(row=4, column=1, pady=(0, 5), padx=(0, 5))
+
+    birth_date_entry = tk.Entry(general_frame, textvariable=var_2, relief="solid", font=entry_font)
+    birth_date_entry.grid(row=4, column=2, ipadx=80)
+
+    # Death
+
+    death_location_label = tk.Label(general_frame, text="Death Place", background="white", foreground="black",
+                                    font=label_font)
+    death_location_label.grid(row=5, column=1, pady=(0, 5), padx=(0, 5))
+
+    death_location_entry = tk.Entry(general_frame, textvariable=var_3, relief="solid", font=entry_font)
+    death_location_entry.grid(row=5, column=2, ipadx=80)
+
+    death_date_label = tk.Label(general_frame, text="Death Date (age)", background="white", foreground="black",
+                                font=label_font)
+    death_date_label.grid(row=6, column=1, pady=(0, 5), padx=(0, 5))
+
+    death_date_entry = tk.Entry(general_frame, textvariable=var_4, relief="solid", font=entry_font)
+    death_date_entry.grid(row=6, column=2, ipadx=80)
+
+    # Work, Achievements
+    job_label = tk.Label(general_frame, text="Work", background="white", foreground="black",
+                                    font=label_font)
+    job_label.grid(row=7, column=1, pady=(0, 5), padx=(0, 5))
+
+    job_entry = tk.Entry(general_frame, textvariable=var_5, relief="solid", font=entry_font)
+    job_entry.grid(row=7, column=2, ipadx=80)
+
+    achievements_label = tk.Label(general_frame, text="Achievements", background="white", foreground="black",
+                                font=label_font)
+    achievements_label.grid(row=8, column=1, pady=(0, 5), padx=(0, 5))
+
+    achievements_entry = tk.Entry(general_frame, textvariable=var_6, relief="solid", font=entry_font)
+    achievements_entry.grid(row=8, column=2, ipadx=80)
+
+    # Narrative
+
+    thesis_label = tk.Label(general_frame, text="Thesis", background="white", foreground="black",
+                         font=label_font)
+    thesis_label.grid(row=9, column=1, pady=(0, 5), padx=(0, 5))
+
+    thesis_entry = tk.Entry(general_frame, textvariable=thesis_var, relief="solid", font=entry_font)
+    thesis_entry.grid(row=9, column=2, ipadx=80)
+
+    point_1_label = tk.Label(general_frame, text="Point 1", background="white", foreground="black",
+                                  font=label_font)
+    point_1_label.grid(row=10, column=1, pady=(0, 5), padx=(0, 5))
+
+    point_1_entry = tk.Entry(general_frame, textvariable=topic_sentence_1_var, relief="solid", font=entry_font)
+    point_1_entry.grid(row=10, column=2, ipadx=80)
+
+    point_2_label = tk.Label(general_frame, text="Point 2", background="white", foreground="black",
+                         font=label_font)
+    point_2_label.grid(row=11, column=1, pady=(0, 5), padx=(0, 5))
+
+    point_2_entry = tk.Entry(general_frame, textvariable=topic_sentence_2_var, relief="solid", font=entry_font)
+    point_2_entry.grid(row=11, column=2, ipadx=80)
+
+    point_3_label = tk.Label(general_frame, text="Point 3", background="white", foreground="black",
+                                  font=label_font)
+    point_3_label.grid(row=12, column=1, pady=(0, 5), padx=(0, 5))
+
+    point_3_entry = tk.Entry(general_frame, textvariable=topic_sentence_3_var, relief="solid", font=entry_font)
+    point_3_entry.grid(row=12, column=2, ipadx=80)
+
+
+    finish_frame = tk.Frame(general_frame, background="white")
+    finish_frame.grid(row=13, column=1, columnspan=2)
+
+    prompt_generation_button = tk.Button(finish_frame, text="Prompt", background="white", foreground="black",
+                                         command=simple_biography_prompt)
+    prompt_generation_button.grid(row=0, column=0, ipadx=20, ipady=10)
+
+    outline_generation_button = tk.Button(finish_frame, text="Outline", background="white", foreground="black",
+                                          command=simple_biography_outline)
+    outline_generation_button.grid(row=0, column=1, ipadx=20, ipady=10)
+
+    clear_button = tk.Button(finish_frame, text="Clear", background="black", foreground="white")
+    clear_button.grid(row=1, column=0, columnspan=2, sticky="swen")
+    clear_button.bind("<Double-Button-1>", reset_variables)
+    clear_button.bind("<Button-3>", lambda e: test_variables('simple biography'))
 
 
 
@@ -276,7 +636,12 @@ def make_selection():
     main_page.pack_forget()
     if name == "Simple Essay":
         simple_essay()
-
+    elif name == "Simple Resume":
+        simple_resume()
+    elif name == "Simple Cover Letter":
+        simple_cover_letter()
+    elif name == "Simple Biography":
+        simple_biography()
     else:
         main_page.pack(side="top", fill="both")
 
