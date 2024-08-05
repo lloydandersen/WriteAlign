@@ -26,7 +26,6 @@ var_11 = tk.StringVar()
 var_12 = tk.StringVar()
 var_13 = tk.StringVar()
 var_14 = tk.StringVar()
-
 file_name_var = tk.StringVar()
 
 
@@ -41,7 +40,7 @@ select_template = ttk.Combobox(main_page, textvariable=template_var, values=temp
 select_template.grid(row=1, column=0)
 template_var.set(template_list[0])
 finish_frame = tk.Frame()
-general_frame = tk.Frame()
+general_frame = tk.Frame(root)
 
 
 # Template Frames
@@ -120,21 +119,21 @@ def test_variables(set, *args):
         var_11.set("Microsoft Office: Word, Excel, Powerpoint")
         var_12.set("Content Writing: Code documentation, HomeSkool Lessons")
         var_13.set("Las Vegas, Nevada")
-        summary_var.set("I am a ethuistaic teammember. Whether in the kicthen or on a group portfolio optimization assignmnet. I am a prationer of servant leadership and virtual teams.")
+        summary_var.set("I am a enthusiastic team member. Whether in the kitchen or on a group portfolio optimization assignment. I am a practitioner of servant leadership and am great with virtual teams.")
 
 
     elif set == "simple cover letter":
-        essay_name_var.set("Embedded Engineer")
-        thesis_var.set("")
-        topic_sentence_1_var.set("")
-        topic_sentence_2_var.set("")
-        topic_sentence_3_var.set("")
-        var_1.set("")
-        var_2.set("")
-        var_3.set("")
-        var_4.set("")
-        var_5.set("")
-        var_6.set("")
+        essay_name_var.set("Joe's Stock Yard")
+        thesis_var.set("Stocking Manager")
+        topic_sentence_1_var.set("Efficient")
+        topic_sentence_2_var.set("Organized")
+        topic_sentence_3_var.set("Helpful")
+        var_1.set("Lewiston, Maine")
+        var_2.set("Lloyd Andersen")
+        var_3.set("Trainer")
+        var_4.set("Pizza Hut")
+        var_5.set("University of Las Vegas, Nevada")
+        var_6.set("Bachelor of Science in Business, Finance, Cum Laude")
         summary_var.set("")
 
 
@@ -173,16 +172,53 @@ The concluding paragraph shall emphasize the following statement: {summary_var.g
 
 def generate_simple_resume_prompt():
     file = open(f"{file_name_var.get()}.txt", "w")
-    file.write(f"""
-    
+    file.write(f"""Write me a simple resume for my new job.
+Make sure to organize the resume into groups.
+
+My name is {essay_name_var.get()}.
+My address is {var_13.get()}.
+My phone number is {thesis_var.get()}.
+My email address is {var_9.get()}.
+
+There should be an about me section.
+It should include the statement: {summary_var.get()}
+
+My education background includes:
+1. A {var_2.get()} from the {var_1.get()}.
+2. A {var_4.get()} from the {var_3.get()}.
+
+My work experience includes:
+1. {var_6.get()} at {var_5.get()}.
+2. {var_8.get()} at {var_7.get()}.
+
+My top three traits are:
+1. {topic_sentence_1_var.get()}
+2. {topic_sentence_2_var.get()}
+3. {topic_sentence_3_var.get()}
+
+My top three skills are:
+1. {var_10.get()}
+2. {var_11.get()}
+3. {var_12.get()}
+
+Make sure to include all the information above in the resume.
     """)
     file.close()
 
 
 def generate_simple_cover_letter_prompt():
     file = open(f"{file_name_var.get()}.txt", "w")
-    file.write(f"""
+    file.write(f"""Please write a cover letter for a job I am trying to get.
+The companies name is {essay_name_var.get()}.
+{essay_name_var.get()} is located in {var_1.get()}.
+The job title is called {thesis_var.get()}.
+The words I want to emphasize about the job are {topic_sentence_1_var.get()}, {topic_sentence_2_var.get()}, and {topic_sentence_3_var.get()}.
+My name is {var_2.get()}.
+I previously worked as a {var_3.get()} at {var_4.get()}.
+I went to school at {var_5.get()} and got a {var_6.get()}
 
+Make a case for why my previous work and education experience will help me be a good choice for {thesis_var.get()} role.
+Please limit the cover letter to three paragraphs.
     """)
     file.close()
 
@@ -495,8 +531,14 @@ def simple_essay():
     clear_button.bind("<Double-Button-1>", reset_variables)
     clear_button.bind("<Button-3>", lambda e: test_variables('simple essay'))
 
-def simple_resume():
+def simple_resume_2():
+
     clear_general_frame()
+
+    for child in root.winfo_children():
+        child.pack_forget()
+
+
     general_frame = tk.Frame(root, background="white")
     general_frame.pack(side="top", pady=(10, 10), padx=10)
     general_frame.columnconfigure((0, 1), weight=1)
@@ -507,7 +549,90 @@ def simple_resume():
 
     simple_essay_title = tk.Label(general_frame, text="Simple Resume", background="white", foreground="black",
                                   font=("Times New Roman", 30, "bold"))
-    simple_essay_title.grid(row=1, column=1, columnspan=2, pady=0)
+    simple_essay_title.grid(row=1, column=1, columnspan=2, pady=(0, 30))
+
+    skill_one_label = tk.Label(general_frame, text="Skill 1", background="white", foreground="black",
+                               font=label_font)
+    skill_one_label.grid(row=2, column=1, pady=(0, 5), padx=(0, 5))
+
+    skill_one_entry = tk.Entry(general_frame, textvariable=var_10, relief="solid", font=entry_font)
+    skill_one_entry.grid(row=2, column=2, ipadx=80)
+
+    skill_two_label = tk.Label(general_frame, text="Skill 2", background="white", foreground="black",
+                               font=label_font)
+    skill_two_label.grid(row=3, column=1, pady=(0, 5), padx=(0, 5))
+
+    skill_two_entry = tk.Entry(general_frame, textvariable=var_11, relief="solid", font=entry_font)
+    skill_two_entry.grid(row=3, column=2, ipadx=80)
+
+    skill_three_label = tk.Label(general_frame, text="Skill 3", background="white", foreground="black",
+                                 font=label_font)
+    skill_three_label.grid(row=4, column=1, pady=(0, 5), padx=(0, 5))
+
+    skill_three_entry = tk.Entry(general_frame, textvariable=var_12, relief="solid", font=entry_font)
+    skill_three_entry.grid(row=4, column=2, ipadx=80)
+
+    point_1_label = tk.Label(general_frame, text="Point 1", background="white", foreground="black",
+                             font=label_font)
+    point_1_label.grid(row=5, column=1, pady=(0, 5), padx=(0, 5))
+
+    point_1_entry = tk.Entry(general_frame, textvariable=topic_sentence_1_var, relief="solid", font=entry_font)
+    point_1_entry.grid(row=5, column=2, ipadx=80)
+
+    point_2_label = tk.Label(general_frame, text="Point 2", background="white", foreground="black",
+                             font=label_font)
+    point_2_label.grid(row=6, column=1, pady=(0, 5), padx=(0, 5))
+
+    point_2_entry = tk.Entry(general_frame, textvariable=topic_sentence_2_var, relief="solid", font=entry_font)
+    point_2_entry.grid(row=6, column=2, ipadx=80)
+
+    point_3_label = tk.Label(general_frame, text="Point 3", background="white", foreground="black",
+                             font=label_font)
+    point_3_label.grid(row=7, column=1, padx=(0, 5))
+
+    point_3_entry = tk.Entry(general_frame, textvariable=topic_sentence_3_var, relief="solid", font=entry_font)
+    point_3_entry.grid(row=7, column=2, ipadx=80)
+
+    about_me_label = tk.Label(general_frame, text="About Me", background="white", foreground="black",
+                             font=label_font)
+    about_me_label.grid(row=8, column=1, padx=(0, 5))
+
+    about_me_entry = tk.Entry(general_frame, textvariable=summary_var, relief="solid", font=entry_font)
+    about_me_entry.grid(row=8, column=2, ipadx=80)
+
+
+    finish_frame = tk.Frame(general_frame, background="white")
+    finish_frame.grid(row=9, column=1, columnspan=2)
+
+    prompt_generation_button = tk.Button(finish_frame, text="Prompt", background="white", foreground="black",
+                                         command=simple_resume_prompt)
+    prompt_generation_button.grid(row=0, column=0, ipadx=20, ipady=10)
+
+    outline_generation_button = tk.Button(finish_frame, text="Outline", background="white", foreground="black",
+                                          command=simple_resume_outline)
+    outline_generation_button.grid(row=0, column=1, ipadx=20, ipady=10)
+
+    clear_button = tk.Button(finish_frame, text="Clear", background="black", foreground="white")
+    clear_button.grid(row=1, column=0, columnspan=2, sticky="swen")
+    clear_button.bind("<Double-Button-1>", reset_variables)
+    clear_button.bind("<Button-3>", lambda e: test_variables('simple resume'))
+
+
+
+def simple_resume():
+    clear_general_frame()
+
+    general_frame = tk.Frame(root, background="white")
+    general_frame.pack(side="top", pady=(10, 10), padx=10)
+    general_frame.columnconfigure((0, 1), weight=1)
+
+    back_button = tk.Button(general_frame, text="back", background="black", foreground="white",
+                            command=back_to_home)
+    back_button.grid(row=0, column=0)
+
+    simple_essay_title = tk.Label(general_frame, text="Simple Resume", background="white", foreground="black",
+                                  font=("Times New Roman", 30, "bold"))
+    simple_essay_title.grid(row=1, column=1, columnspan=2, pady=(0, 30))
 
     # sep
     simple_resume_name_label = tk.Label(general_frame, text="Name", background="white", foreground="black",
@@ -524,14 +649,14 @@ def simple_resume():
     highest_education_name_entry = tk.Entry(general_frame, textvariable=var_1, relief="solid", font=entry_font)
     highest_education_name_entry.grid(row=3, column=2, ipadx=80)
 
-    highest_degree_label = tk.Label(general_frame, text="Degree Received", background="white", foreground="black",
+    highest_degree_label = tk.Label(general_frame, text="Degree", background="white", foreground="black",
                                 font=label_font)
     highest_degree_label.grid(row=4, column=1, pady=(0, 5), padx=(0, 5))
 
     highest_degree_entry = tk.Entry(general_frame, textvariable=var_2, relief="solid", font=entry_font)
     highest_degree_entry.grid(row=4, column=2, ipadx=80)
 
-    # Death
+    # Education
 
     secondary_education_label = tk.Label(general_frame, text="School Name", background="white", foreground="black",
                                     font=label_font)
@@ -577,7 +702,7 @@ def simple_resume():
     old_job_role_entry = tk.Entry(general_frame, textvariable=var_8, relief="solid", font=entry_font)
     old_job_role_entry.grid(row=10, column=2, ipadx=80)
 
-    # Narrative
+    # Contact
 
     phone_number_label = tk.Label(general_frame, text="Number", background="white", foreground="black",
                             font=label_font)
@@ -600,68 +725,28 @@ def simple_resume():
     address_entry = tk.Entry(general_frame, textvariable=var_13, relief="solid", font=entry_font)
     address_entry.grid(row=13, column=2, ipadx=80)
 
-    skill_one_label = tk.Label(general_frame, text="Skill", background="white", foreground="black",
-                             font=label_font)
-    skill_one_label.grid(row=14, column=1, pady=(0, 5), padx=(0, 5))
-
-    skill_one_entry = tk.Entry(general_frame, textvariable=var_10, relief="solid", font=entry_font)
-    skill_one_entry.grid(row=14, column=2, ipadx=80)
-
-    skill_two_label = tk.Label(general_frame, text="Skill", background="white", foreground="black",
-                             font=label_font)
-    skill_two_label.grid(row=15, column=1, pady=(0, 5), padx=(0, 5))
-
-    skill_two_entry = tk.Entry(general_frame, textvariable=var_11, relief="solid", font=entry_font)
-    skill_two_entry.grid(row=15, column=2, ipadx=80)
-
-    skill_three_label = tk.Label(general_frame, text="Skill", background="white", foreground="black",
-                             font=label_font)
-    skill_three_label.grid(row=16, column=1, pady=(0, 5), padx=(0, 5))
-
-    skill_three_entry = tk.Entry(general_frame, textvariable=var_12, relief="solid", font=entry_font)
-    skill_three_entry.grid(row=16, column=2, ipadx=80)
+    next_page_button = tk.Button(general_frame, text="Next", command=simple_resume_2, background="white", foreground="black")
+    next_page_button.grid(row=14, column=1, columnspan=2, pady=(20, 0), ipadx=80)
 
 
 
-    point_1_label = tk.Label(general_frame, text="Point 1", background="white", foreground="black",
-                             font=label_font)
-    point_1_label.grid(row=17, column=1, pady=(0, 5), padx=(0, 5))
-
-    point_1_entry = tk.Entry(general_frame, textvariable=topic_sentence_1_var, relief="solid", font=entry_font)
-    point_1_entry.grid(row=17, column=2, ipadx=80)
-
-    point_2_label = tk.Label(general_frame, text="Point 2", background="white", foreground="black",
-                             font=label_font)
-    point_2_label.grid(row=18, column=1, pady=(0, 5), padx=(0, 5))
-
-    point_2_entry = tk.Entry(general_frame, textvariable=topic_sentence_2_var, relief="solid", font=entry_font)
-    point_2_entry.grid(row=18, column=2, ipadx=80)
-
-    point_3_label = tk.Label(general_frame, text="Point 3", background="white", foreground="black",
-                             font=label_font)
-    point_3_label.grid(row=19, column=1, padx=(0, 5))
-
-    point_3_entry = tk.Entry(general_frame, textvariable=topic_sentence_3_var, relief="solid", font=entry_font)
-    point_3_entry.grid(row=19, column=2, ipadx=80)
-
-
-
+    # Finish
     finish_frame = tk.Frame(general_frame, background="white")
-    finish_frame.grid(row=20, column=1, columnspan=2)
+    finish_frame.grid(row=15, column=1, columnspan=2)
 
-    prompt_generation_button = tk.Button(finish_frame, text="Prompt", background="white", foreground="black",
-                                         command=simple_resume_prompt)
-    prompt_generation_button.grid(row=0, column=0, ipadx=20, ipady=10)
 
-    outline_generation_button = tk.Button(finish_frame, text="Outline", background="white", foreground="black",
-                                          command=simple_resume_outline)
-    outline_generation_button.grid(row=0, column=1, ipadx=20, ipady=10)
+    # prompt_generation_button = tk.Button(finish_frame, text="Prompt", background="white", foreground="black",
+    #                                      command=simple_resume_prompt)
+    # prompt_generation_button.grid(row=0, column=0, ipadx=20, ipady=10)
+    #
+    # outline_generation_button = tk.Button(finish_frame, text="Outline", background="white", foreground="black",
+    #                                       command=simple_resume_outline)
+    # outline_generation_button.grid(row=0, column=1, ipadx=20, ipady=10)
 
     clear_button = tk.Button(finish_frame, text="Clear", background="black", foreground="white")
-    clear_button.grid(row=1, column=0, columnspan=2, sticky="swen")
+    clear_button.grid(row=1, column=0, columnspan=2, sticky="swen", ipadx=80)
     clear_button.bind("<Double-Button-1>", reset_variables)
     clear_button.bind("<Button-3>", lambda e: test_variables('simple resume'))
-
 
 
 def simple_cover_letter():
