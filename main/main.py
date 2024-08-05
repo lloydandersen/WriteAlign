@@ -18,6 +18,14 @@ var_4 = tk.StringVar()
 var_5 = tk.StringVar()
 var_6 = tk.StringVar()
 summary_var = tk.StringVar()
+var_7 = tk.StringVar()
+var_8 = tk.StringVar()
+var_9 = tk.StringVar()
+var_10 = tk.StringVar()
+var_11 = tk.StringVar()
+var_12 = tk.StringVar()
+var_13 = tk.StringVar()
+var_14 = tk.StringVar()
 
 file_name_var = tk.StringVar()
 
@@ -55,6 +63,13 @@ def reset_variables(*args):
     var_4.set("")
     var_5.set("")
     var_6.set("")
+    var_7.set("")
+    var_8.set("")
+    var_9.set("")
+    var_10.set("")
+    var_11.set("")
+    var_12.set("")
+    var_13.set("")
     summary_var.set("")
 
 
@@ -87,10 +102,40 @@ def test_variables(set, *args):
         var_6.set("6th President of Pennsylvania. Founding Father. First Postmaster General.")
 
     elif set == "simple resume":
-        pass
+        essay_name_var.set("Lloyd Andersen")
+        thesis_var.set("702-589-8952")
+        topic_sentence_1_var.set("Teamwork")
+        topic_sentence_2_var.set("Leadership")
+        topic_sentence_3_var.set("Communication")
+        var_1.set("University of Nevada, Las Vegas")
+        var_2.set("Bachelors of Science in Business, Finance, Cum Laude")
+        var_3.set("Northwest Career and Technical Academy")
+        var_4.set("Culinary Arts, Advanced Honors Diploma")
+        var_5.set("Pizza Hut, 2020-2021")
+        var_6.set("Head Cook, Shift Manager, Local Trainer")
+        var_7.set("Pumpkin Patch, 2017, 2018")
+        var_8.set("Arcade Station, Ride Operator")
+        var_9.set("lloydandersenco@gmail.com")
+        var_10.set("Python Language: Tkapp, WriteAlign")
+        var_11.set("Microsoft Office: Word, Excel, Powerpoint")
+        var_12.set("Content Writing: Code documentation, HomeSkool Lessons")
+        var_13.set("Las Vegas, Nevada")
+        summary_var.set("I am a ethuistaic teammember. Whether in the kicthen or on a group portfolio optimization assignmnet. I am a prationer of servant leadership and virtual teams.")
+
 
     elif set == "simple cover letter":
-        pass
+        essay_name_var.set("Embedded Engineer")
+        thesis_var.set("")
+        topic_sentence_1_var.set("")
+        topic_sentence_2_var.set("")
+        topic_sentence_3_var.set("")
+        var_1.set("")
+        var_2.set("")
+        var_3.set("")
+        var_4.set("")
+        var_5.set("")
+        var_6.set("")
+        summary_var.set("")
 
 
 def generate_simple_essay_prompt():
@@ -462,11 +507,147 @@ def simple_resume():
 
     simple_essay_title = tk.Label(general_frame, text="Simple Resume", background="white", foreground="black",
                                   font=("Times New Roman", 30, "bold"))
-    simple_essay_title.grid(row=1, column=1, columnspan=2, pady=(0, 30))
+    simple_essay_title.grid(row=1, column=1, columnspan=2, pady=0)
+
+    # sep
+    simple_resume_name_label = tk.Label(general_frame, text="Name", background="white", foreground="black",
+                                       font=label_font)
+    simple_resume_name_label.grid(row=2, column=1, pady=(0, 5), padx=(0, 5))
+
+    simple_resume_name_entry = tk.Entry(general_frame, textvariable=essay_name_var, relief="solid", font=entry_font)
+    simple_resume_name_entry.grid(row=2, column=2, ipadx=80)
+
+    highest_education_name_label = tk.Label(general_frame, text="School Name", background="white", foreground="black",
+                                    font=label_font)
+    highest_education_name_label.grid(row=3, column=1, pady=(0, 5), padx=(0, 5))
+
+    highest_education_name_entry = tk.Entry(general_frame, textvariable=var_1, relief="solid", font=entry_font)
+    highest_education_name_entry.grid(row=3, column=2, ipadx=80)
+
+    highest_degree_label = tk.Label(general_frame, text="Degree Received", background="white", foreground="black",
+                                font=label_font)
+    highest_degree_label.grid(row=4, column=1, pady=(0, 5), padx=(0, 5))
+
+    highest_degree_entry = tk.Entry(general_frame, textvariable=var_2, relief="solid", font=entry_font)
+    highest_degree_entry.grid(row=4, column=2, ipadx=80)
+
+    # Death
+
+    secondary_education_label = tk.Label(general_frame, text="School Name", background="white", foreground="black",
+                                    font=label_font)
+    secondary_education_label.grid(row=5, column=1, pady=(0, 5), padx=(0, 5))
+
+    secondary_education_entry = tk.Entry(general_frame, textvariable=var_3, relief="solid", font=entry_font)
+    secondary_education_entry.grid(row=5, column=2, ipadx=80)
+
+    secondary_education_degree_label = tk.Label(general_frame, text="Degree", background="white", foreground="black",
+                                font=label_font)
+    secondary_education_degree_label.grid(row=6, column=1, pady=(0, 5), padx=(0, 5))
+
+    secondary_education_degree_entry = tk.Entry(general_frame, textvariable=var_4, relief="solid", font=entry_font)
+    secondary_education_degree_entry.grid(row=6, column=2, ipadx=80)
+
+    # Work, Achievements
+    last_job_label = tk.Label(general_frame, text="Job", background="white", foreground="black",
+                         font=label_font)
+    last_job_label.grid(row=7, column=1, pady=(0, 5), padx=(0, 5))
+
+    last_job_entry = tk.Entry(general_frame, textvariable=var_5, relief="solid", font=entry_font)
+    last_job_entry.grid(row=7, column=2, ipadx=80)
+
+    last_job_role_label = tk.Label(general_frame, text="Role", background="white", foreground="black",
+                                  font=label_font)
+    last_job_role_label.grid(row=8, column=1, pady=(0, 5), padx=(0, 5))
+
+    last_job_role_entry = tk.Entry(general_frame, textvariable=var_6, relief="solid", font=entry_font)
+    last_job_role_entry.grid(row=8, column=2, ipadx=80)
+    #
+
+    old_job_label = tk.Label(general_frame, text="Job", background="white", foreground="black",
+                              font=label_font)
+    old_job_label.grid(row=9, column=1, pady=(0, 5), padx=(0, 5))
+
+    old_job_entry = tk.Entry(general_frame, textvariable=var_7, relief="solid", font=entry_font)
+    old_job_entry.grid(row=9, column=2, ipadx=80)
+
+    old_job_role_label = tk.Label(general_frame, text="Role", background="white", foreground="black",
+                                   font=label_font)
+    old_job_role_label.grid(row=10, column=1, pady=(0, 5), padx=(0, 5))
+
+    old_job_role_entry = tk.Entry(general_frame, textvariable=var_8, relief="solid", font=entry_font)
+    old_job_role_entry.grid(row=10, column=2, ipadx=80)
+
+    # Narrative
+
+    phone_number_label = tk.Label(general_frame, text="Number", background="white", foreground="black",
+                            font=label_font)
+    phone_number_label.grid(row=11, column=1, pady=(0, 5), padx=(0, 5))
+
+    phone_number_entry = tk.Entry(general_frame, textvariable=thesis_var, relief="solid", font=entry_font)
+    phone_number_entry.grid(row=11, column=2, ipadx=80)
+
+    email_label = tk.Label(general_frame, text="Email", background="white", foreground="black",
+                                  font=label_font)
+    email_label.grid(row=12, column=1, pady=(0, 5), padx=(0, 5))
+
+    email_entry = tk.Entry(general_frame, textvariable=var_9, relief="solid", font=entry_font)
+    email_entry.grid(row=12, column=2, ipadx=80)
+
+    address_label = tk.Label(general_frame, text="Address", background="white", foreground="black",
+                           font=label_font)
+    address_label.grid(row=13, column=1, pady=(0, 5), padx=(0, 5))
+
+    address_entry = tk.Entry(general_frame, textvariable=var_13, relief="solid", font=entry_font)
+    address_entry.grid(row=13, column=2, ipadx=80)
+
+    skill_one_label = tk.Label(general_frame, text="Skill", background="white", foreground="black",
+                             font=label_font)
+    skill_one_label.grid(row=14, column=1, pady=(0, 5), padx=(0, 5))
+
+    skill_one_entry = tk.Entry(general_frame, textvariable=var_10, relief="solid", font=entry_font)
+    skill_one_entry.grid(row=14, column=2, ipadx=80)
+
+    skill_two_label = tk.Label(general_frame, text="Skill", background="white", foreground="black",
+                             font=label_font)
+    skill_two_label.grid(row=15, column=1, pady=(0, 5), padx=(0, 5))
+
+    skill_two_entry = tk.Entry(general_frame, textvariable=var_11, relief="solid", font=entry_font)
+    skill_two_entry.grid(row=15, column=2, ipadx=80)
+
+    skill_three_label = tk.Label(general_frame, text="Skill", background="white", foreground="black",
+                             font=label_font)
+    skill_three_label.grid(row=16, column=1, pady=(0, 5), padx=(0, 5))
+
+    skill_three_entry = tk.Entry(general_frame, textvariable=var_12, relief="solid", font=entry_font)
+    skill_three_entry.grid(row=16, column=2, ipadx=80)
+
+
+
+    point_1_label = tk.Label(general_frame, text="Point 1", background="white", foreground="black",
+                             font=label_font)
+    point_1_label.grid(row=17, column=1, pady=(0, 5), padx=(0, 5))
+
+    point_1_entry = tk.Entry(general_frame, textvariable=topic_sentence_1_var, relief="solid", font=entry_font)
+    point_1_entry.grid(row=17, column=2, ipadx=80)
+
+    point_2_label = tk.Label(general_frame, text="Point 2", background="white", foreground="black",
+                             font=label_font)
+    point_2_label.grid(row=18, column=1, pady=(0, 5), padx=(0, 5))
+
+    point_2_entry = tk.Entry(general_frame, textvariable=topic_sentence_2_var, relief="solid", font=entry_font)
+    point_2_entry.grid(row=18, column=2, ipadx=80)
+
+    point_3_label = tk.Label(general_frame, text="Point 3", background="white", foreground="black",
+                             font=label_font)
+    point_3_label.grid(row=19, column=1, padx=(0, 5))
+
+    point_3_entry = tk.Entry(general_frame, textvariable=topic_sentence_3_var, relief="solid", font=entry_font)
+    point_3_entry.grid(row=19, column=2, ipadx=80)
+
 
 
     finish_frame = tk.Frame(general_frame, background="white")
-    finish_frame.grid(row=13, column=1, columnspan=2)
+    finish_frame.grid(row=20, column=1, columnspan=2)
 
     prompt_generation_button = tk.Button(finish_frame, text="Prompt", background="white", foreground="black",
                                          command=simple_resume_prompt)
