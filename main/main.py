@@ -126,9 +126,9 @@ def test_variables(set, *args):
     elif set == "simple cover letter":
         essay_name_var.set("Joe's Stock Yard")
         thesis_var.set("Stocking Manager")
-        topic_sentence_1_var.set("Efficient")
-        topic_sentence_2_var.set("Organized")
-        topic_sentence_3_var.set("Helpful")
+        topic_sentence_1_var.set("Efficiency")
+        topic_sentence_2_var.set("Organization")
+        topic_sentence_3_var.set("Teamwork")
         var_1.set("Lewiston, Maine")
         var_2.set("Lloyd Andersen")
         var_3.set("Trainer")
@@ -274,17 +274,65 @@ def generate_simple_essay_outline():
 
 def generate_simple_resume_outline():
     document = Document()
+    document.add_heading(f"{essay_name_var.get()}", level=0)
+    document.add_heading("About me", level=1)
+    document.add_paragraph(f"{essay_name_var.get()}")
+    document.add_paragraph(f"{var_13.get()}")
+    document.add_paragraph(f"{thesis_var.get()}")
+    document.add_paragraph(f"{var_9.get()}")
+    document.add_paragraph(f"{topic_sentence_1_var.get()}, {topic_sentence_2_var.get()}, {topic_sentence_3_var.get()}")
+    document.add_paragraph(f"{summary_var.get()}")
+
+    document.add_heading("Work Experience", level=1)
+    document.add_paragraph(f"{var_5.get()}")
+    document.add_paragraph(f"{var_6.get()}")
+    document.add_paragraph(f"{var_7.get()}")
+    document.add_paragraph(f"{var_8.get()}")
+
+    document.add_heading("Educational Background", level=1)
+    document.add_paragraph(f"{var_1.get()}")
+    document.add_paragraph(f"{var_2.get()}")
+    document.add_paragraph(f"{var_3.get()}")
+    document.add_paragraph(f"{var_4.get()}")
+
+    document.add_heading("Skills", level=1)
+    document.add_paragraph(f"{var_10.get()}")
+    document.add_paragraph(f"{var_11.get()}")
+    document.add_paragraph(f"{var_12.get()}")
 
     document.save(f"{file_name_var.get()}.docx")
 
 
 def generate_simple_cover_letter_outline():
     document = Document()
+    # Your Name, Your Address, Today's date
     document.add_paragraph(f"{var_2.get()}")
     document.add_paragraph(f"{summary_var.get()}")
     document.add_paragraph(f"{dt.date.today()}")
 
+    # Company Name and Address
+    document.add_paragraph(f"{essay_name_var.get()}")
+    document.add_paragraph(f"{var_1.get()}")
+
+    document.add_paragraph(f"Dear {essay_name_var.get()}: (add hiring manager's name here)")
+    document.add_paragraph(f"It is an amazing opportunity that you have the {thesis_var.get()} role open.")
+    document.add_paragraph(f"As an aspiring {thesis_var.get()}, my educational and work history was made for this opportunity.")
+    document.add_paragraph(f"I heard about {essay_name_var.get()} from the career fair at my school.")
+    document.add_paragraph(f"And ever since I have been excited about it.")
+
+    document.add_paragraph(f"I hope to bring {topic_sentence_1_var.get()}, {topic_sentence_2_var.get()} and {topic_sentence_3_var.get()} to this role.")
+
+    document.add_paragraph(f"My educational background includes a {var_6.get()} from the {var_5.get()}.")
+    document.add_paragraph(f"In my past roles I learned alot about  {topic_sentence_1_var.get()}, {topic_sentence_2_var.get()} and {topic_sentence_3_var.get()}.")
+    document.add_paragraph(f"I worked for {var_4.get()} as a {var_3.get()}. The above skills were very important for my past roles.")
+    document.add_paragraph(f"Thank You for this opportunity,")
+    document.add_paragraph(f"{var_2.get()}")
+    document.add_paragraph(f"(Digital Signature)")
+
+    document.add_paragraph(f"Resume Enclosed.")
     document.save(f"{file_name_var.get()}.docx")
+
+
 
 
 def generate_simple_biography_outline():
