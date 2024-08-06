@@ -1,5 +1,24 @@
 Your friendly neighborhood writing organizer.
 
-Some say Adlibs for Ai.
+Some say Madlibs for Ai. Others enjoy having a place to start writing.
 
 Whether you write in a chat window or a word document. WriteAlign, aligns your writing.
+
+Features
+
+Four simple templates solve many common writing formats.
+1. Simple Essay is a template for the stanard five paragraph essay used in most primary schools.
+2. Simple Biography is a templayte for a chronicalogical view of the subjects life with empacise on accomplishemnts.
+3. Simple Resume builds simple text based resumes for your job hunt.
+4. Simple Cover Letter allows hiring managers to learn how your resume makes you perfect for the job.
+
+How to Use
+First run the main/main.py in a text editor or download from the readme page.
+Second select the tempalate you want to use and click the write button.
+Three Fill in the boxes. If you need an example--right clickt he clear button. It will erase former work so be careful.
+Four Click prompt to generate a text file to plug into your favorite Ai writer or Outline for a docx file to write it yourself.
+
+Helpful tips
+1. The clear button will erase all your hard work! Double click to use.
+2. Right click the clear button to erase all your work and fill in with helpful examples.
+3. When generating a prompt text file or outline docx file. Make sure to come up with an unique name or old files with the same name may be overwritten.

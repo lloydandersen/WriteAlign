@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from docx import Document
+import datetime as dt
 
 root = tk.Tk()
 root.title("WriteAlign")
@@ -134,7 +135,7 @@ def test_variables(set, *args):
         var_4.set("Pizza Hut")
         var_5.set("University of Las Vegas, Nevada")
         var_6.set("Bachelor of Science in Business, Finance, Cum Laude")
-        summary_var.set("")
+        summary_var.set("Las Vegas, Nevada")
 
 
 def generate_simple_essay_prompt():
@@ -212,12 +213,13 @@ def generate_simple_cover_letter_prompt():
 The companies name is {essay_name_var.get()}.
 {essay_name_var.get()} is located in {var_1.get()}.
 The job title is called {thesis_var.get()}.
-The words I want to emphasize about the job are {topic_sentence_1_var.get()}, {topic_sentence_2_var.get()}, and {topic_sentence_3_var.get()}.
 My name is {var_2.get()}.
 I previously worked as a {var_3.get()} at {var_4.get()}.
-I went to school at {var_5.get()} and got a {var_6.get()}
+I went to school at {var_5.get()} and got a {var_6.get()}.
 
-Make a case for why my previous work and education experience will help me be a good choice for {thesis_var.get()} role.
+The words I want to emphasize about the job are {topic_sentence_1_var.get()}, {topic_sentence_2_var.get()}, and {topic_sentence_3_var.get()}.
+
+Make a case for why my previous work and education experience will help me be a good choice for the {thesis_var.get()} role.
 Please limit the cover letter to three paragraphs.
     """)
     file.close()
@@ -278,6 +280,9 @@ def generate_simple_resume_outline():
 
 def generate_simple_cover_letter_outline():
     document = Document()
+    document.add_paragraph(f"{var_2.get()}")
+    document.add_paragraph(f"{summary_var.get()}")
+    document.add_paragraph(f"{dt.date.today()}")
 
     document.save(f"{file_name_var.get()}.docx")
 
@@ -734,17 +739,8 @@ def simple_resume():
     finish_frame = tk.Frame(general_frame, background="white")
     finish_frame.grid(row=15, column=1, columnspan=2)
 
-
-    # prompt_generation_button = tk.Button(finish_frame, text="Prompt", background="white", foreground="black",
-    #                                      command=simple_resume_prompt)
-    # prompt_generation_button.grid(row=0, column=0, ipadx=20, ipady=10)
-    #
-    # outline_generation_button = tk.Button(finish_frame, text="Outline", background="white", foreground="black",
-    #                                       command=simple_resume_outline)
-    # outline_generation_button.grid(row=0, column=1, ipadx=20, ipady=10)
-
     clear_button = tk.Button(finish_frame, text="Clear", background="black", foreground="white")
-    clear_button.grid(row=1, column=0, columnspan=2, sticky="swen", ipadx=80)
+    clear_button.grid(row=0, column=0, columnspan=2, sticky="swen", ipadx=80)
     clear_button.bind("<Double-Button-1>", reset_variables)
     clear_button.bind("<Button-3>", lambda e: test_variables('simple resume'))
 
@@ -763,8 +759,94 @@ def simple_cover_letter():
                                   font=("Times New Roman", 30, "bold"))
     simple_essay_title.grid(row=1, column=1, columnspan=2, pady=(0, 30))
 
+    # Entries
+    company_name_label = tk.Label(general_frame, text="Company", background="white", foreground="black",
+                                        font=label_font)
+    company_name_label.grid(row=2, column=1, pady=(0, 5), padx=(0, 5))
+
+    company_name_entry = tk.Entry(general_frame, textvariable=essay_name_var, relief="solid", font=entry_font)
+    company_name_entry.grid(row=2, column=2, ipadx=80)
+
+    company_location_label = tk.Label(general_frame, text="Location", background="white", foreground="black",
+                                  font=label_font)
+    company_location_label.grid(row=3, column=1, pady=(0, 5), padx=(0, 5))
+
+    company_location_entry = tk.Entry(general_frame, textvariable=var_1, relief="solid", font=entry_font)
+    company_location_entry.grid(row=3, column=2, ipadx=80)
+
+    role_name_label = tk.Label(general_frame, text="Role Title", background="white", foreground="black",
+                                  font=label_font)
+    role_name_label.grid(row=4, column=1, pady=(0, 5), padx=(0, 5))
+
+    role_name_entry = tk.Entry(general_frame, textvariable=thesis_var, relief="solid", font=entry_font)
+    role_name_entry.grid(row=4, column=2, ipadx=80)
+
+    name_label = tk.Label(general_frame, text="Name", background="white", foreground="black",
+                                  font=label_font)
+    name_label.grid(row=5, column=1, pady=(0, 5), padx=(0, 5))
+
+    name_entry = tk.Entry(general_frame, textvariable=var_2, relief="solid", font=entry_font)
+    name_entry.grid(row=5, column=2, ipadx=80)
+
+    address_label = tk.Label(general_frame, text="Address", background="white", foreground="black",
+                                  font=label_font)
+    address_label.grid(row=6, column=1, pady=(0, 5), padx=(0, 5))
+
+    address_entry = tk.Entry(general_frame, textvariable=summary_var, relief="solid", font=entry_font)
+    address_entry.grid(row=6, column=2, ipadx=80)
+
+    last_company_name_label = tk.Label(general_frame, text="Last Job Name", background="white", foreground="black",
+                                  font=label_font)
+    last_company_name_label.grid(row=7, column=1, pady=(0, 5), padx=(0, 5))
+
+    last_company_name_entry = tk.Entry(general_frame, textvariable=var_4, relief="solid", font=entry_font)
+    last_company_name_entry.grid(row=7, column=2, ipadx=80)
+
+    last_company_title_label = tk.Label(general_frame, text="Last Job Title", background="white", foreground="black",
+                                  font=label_font)
+    last_company_title_label.grid(row=8, column=1, pady=(0, 5), padx=(0, 5))
+
+    last_company_title_entry = tk.Entry(general_frame, textvariable=var_3, relief="solid", font=entry_font)
+    last_company_title_entry.grid(row=8, column=2, ipadx=80)
+
+    school_name_label = tk.Label(general_frame, text="School", background="white", foreground="black",
+                                  font=label_font)
+    school_name_label.grid(row=9, column=1, pady=(0, 5), padx=(0, 5))
+
+    school_name_entry = tk.Entry(general_frame, textvariable=var_5, relief="solid", font=entry_font)
+    school_name_entry.grid(row=9, column=2, ipadx=80)
+    degree_name_label = tk.Label(general_frame, text="Degree", background="white", foreground="black",
+                                  font=label_font)
+    degree_name_label.grid(row=10, column=1, pady=(0, 5), padx=(0, 5))
+
+    degree_name_entry = tk.Entry(general_frame, textvariable=var_6, relief="solid", font=entry_font)
+    degree_name_entry.grid(row=10, column=2, ipadx=80)
+
+    key_one_label = tk.Label(general_frame, text="Key 1", background="white", foreground="black",
+                                  font=label_font)
+    key_one_label.grid(row=11, column=1, pady=(0, 5), padx=(0, 5))
+
+    key_one_entry = tk.Entry(general_frame, textvariable=topic_sentence_1_var, relief="solid", font=entry_font)
+    key_one_entry.grid(row=11, column=2, ipadx=80)
+
+    key_two_label = tk.Label(general_frame, text="Key 2", background="white", foreground="black",
+                                  font=label_font)
+    key_two_label.grid(row=12, column=1, pady=(0, 5), padx=(0, 5))
+
+    key_two_entry = tk.Entry(general_frame, textvariable=topic_sentence_2_var, relief="solid", font=entry_font)
+    key_two_entry.grid(row=12, column=2, ipadx=80)
+
+    key_three_label = tk.Label(general_frame, text="Key 3", background="white", foreground="black",
+                                  font=label_font)
+    key_three_label.grid(row=13, column=1, pady=(0, 5), padx=(0, 5))
+
+    key_three_entry = tk.Entry(general_frame, textvariable=topic_sentence_3_var, relief="solid", font=entry_font)
+    key_three_entry.grid(row=13, column=2, ipadx=80)
+
+
+
     finish_frame = tk.Frame(general_frame, background="white")
-    finish_frame.grid(row=13, column=1, columnspan=2)
+    finish_frame.grid(row=14, column=1, columnspan=2)
 
     prompt_generation_button = tk.Button(finish_frame, text="Prompt", background="white", foreground="black",
                                          command=simple_cover_letter_prompt)
